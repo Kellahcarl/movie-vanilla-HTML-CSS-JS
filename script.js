@@ -72,24 +72,25 @@ document.addEventListener("DOMContentLoaded", function () {
   addForm.addEventListener("submit", function (e) {
     e.preventDefault();
     validateYear();
-    // create elements
-    const value = addForm.querySelector('input[type="text"]').value;
-    const li = document.createElement("li");
-    const movieName = document.createElement("span");
-    const deleteBtn = document.createElement("span");
 
-    // add text content
-    movieName.textContent = value;
-    deleteBtn.textContent = "delete";
-    // add classes
-    movieName.classList.add("name");
-    deleteBtn.classList.add("delete");
-    // append to DOM
-    li.appendChild(movieName);
-    li.appendChild(deleteBtn);
-    list.appendChild(li);
+    const value = addForm.querySelector("#movie").value;
+    const year = addForm.querySelector("#yearInput").value;
+    const author = addForm.querySelector("#author").value;
+
+    //lets add the movie to local storage as we create new movie
+    const moviesData = JSON.parse(localStorage.getItem("moviesData"));
+    moviesData.push({
+      name: value,
+      author: author,
+      year_of_release: year,
+    });
+    // console.log(moviesData);
+
+    createMovieListItem(moviesData[moviesData.length - 1]);
     // clear input
-    addForm.querySelector('input[type="text"]').value = "";
+    addForm.querySelector("#movie").value = "";
+    addForm.querySelector("#yearInput").value = "";
+    addForm.querySelector("#author").value = "";
 
     updateLocalStorage(); // Update local storage after addition
   });
@@ -99,6 +100,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const movieItems = Array.from(list.children);
     const moviesData = movieItems.map((item) => ({
       name: item.querySelector(".name").textContent,
+      author: item.querySelector(".author").textContent,
+      year_of_release: item.querySelector(".date").textContent,
     }));
     localStorage.setItem("moviesData", JSON.stringify(moviesData));
   }
@@ -108,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const isValidYear = /^\d{4}$/.test(yearInput);
 
     if (isValidYear) {
-      alert("Year is valid: " + yearInput);
+      //   alert("Year is valid: " + yearInput);
       // You can perform further actions with the valid year here
     } else {
       alert("Invalid year. Please enter a valid 4-digit year.");
