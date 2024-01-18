@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Project</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <header>
+        <div class="page-banner">
+          <h1 style="color: rgb(255, 255, 255)" class="title">Movie Times</h1>
+          <p style="color: rgb(255, 255, 255)">
+            Accurate list of the most amazing movies
+          </p>
+        </div>
+      </header>
+
+      <div id="movie-list">
+        <h2 class="title">Movies to Watch</h2>
+        <ul></ul>
+      </div>
+      <form id="add-movie">
+        <input type="text" id="movie" placeholder="Add your movie" />
+        <input type="text" id="author" placeholder="author"/>
+        <input type="number" id="yearInput" placeholder="YYYY" maxlength="4">
+        <button >Add</button>
+      </form>
+    </div>
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>
